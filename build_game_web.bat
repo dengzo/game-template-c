@@ -1,0 +1,1 @@
+emcc -o builds/web/index.html src/main.c -Os -Wall ./libs/libraylib.a -I. -Ilibs/raylib/src/raylib.h -L. -Llibs/libraylib.a -s USE_GLFW=3 --shell-file web/minshell.html -DPLATFORM_WEB
