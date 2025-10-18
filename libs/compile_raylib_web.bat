@@ -6,4 +6,4 @@ call emcc -c raylib/src/rmodels.c -Os -Wall -DPLATFORM_WEB -DGRAPHICS_API_OPENGL
 call emcc -c raylib/src/utils.c -Os -Wall -DPLATFORM_WEB
 call emcc -c raylib/src/raudio.c -Os -Wall -DPLATFORM_WEB
 
-call emar rcs libraylib.a rcore.o rshapes.o rtextures.o rtext.o rmodels.o utils.o raudio.o
+call emar rcs raylib_web.a rcore.o rshapes.o rtextures.o rtext.o rmodels.o utils.o raudio.o

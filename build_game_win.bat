@@ -1,0 +1,1 @@
+clang -o main.exe src\main.c libs\raylib\src\raylib.rc.data -s -static -Os -std=c99 -Wall -Ilibs\raylib\src -Iexternal -DPLATFORM_DESKTOP -llibs/raylib -lopengl32 -lgdi32 -lshell32 -luser32 -lwinmm
