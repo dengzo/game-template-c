@@ -19,6 +19,7 @@
 
 #include "../libs/raylib/src/raylib.h"
 #include "../libs/box2d/include/box2d/box2d.h"
+#include "arena.h"
 
 //#define PLATFORM_WEB
 
@@ -36,6 +37,8 @@ int count = 0;
 
 b2WorldDef worldDef;
 
+Arena temp_arena;
+
 //----------------------------------------------------------------------------------
 // Module Functions Declaration
 //----------------------------------------------------------------------------------
@@ -49,6 +52,24 @@ int main(void)
     // Initialization
     //--------------------------------------------------------------------------------------
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+
+    temp_arena = arena_init(8);
+
+    i32* bla = arena_alloc(&temp_arena, sizeof(i32));
+    if(bla == 0) {
+        TraceLog(LOG_ERROR, "Arena is full");
+        return 0;
+    }
+
+    *bla = 100;
+
+    // arena_free(&temp_arena);
+
+    bla = arena_alloc(&temp_arena, sizeof(i32));
+    *bla = 1000;
+    
+
+    TraceLog(LOG_INFO, "%i %i", *bla, sizeof(i32));
 
     worldDef = b2DefaultWorldDef();
 
@@ -82,12 +103,12 @@ int main(void)
 
     TraceLog(LOG_INFO, "PRUFA!");
 
-    for (int i = 0; i < 90; ++i)
+    for (int i = 0; i < 10; ++i)
     {
         b2World_Step(worldId, timeStep, subStepCount);
         b2Vec2 position = b2Body_GetPosition(bodyId);
         b2Rot rotation = b2Body_GetRotation(bodyId);
-        TraceLog(LOG_INFO, "%4.2f %4.2f %4.2f\n", position.x, position.y, b2Rot_GetAngle(rotation));
+        TraceLog(LOG_INFO, "%4.2f %4.2f %4.2f", position.x, position.y, b2Rot_GetAngle(rotation));
     }
 
 #if defined(PLATFORM_WEB)
